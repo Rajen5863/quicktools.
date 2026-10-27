@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="QuickTools offers simple free online calculators for percentages, GST, age, salary estimates and loan EMI. No account required.">
+<meta name="theme-color" content="#101827">
+<title>QuickTools — Free Online Calculators</title>
+<style>
+:root{--ink:#101827;--muted:#64748b;--green:#059669;--mint:#d1fae5;--line:#e2e8f0;--paper:#f8fafc;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
+header{background:var(--ink);color:white;padding:18px 20px 54px}.wrap{max-width:1060px;margin:auto}.nav{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:12px;background:#34d399;color:#06281f;display:grid;place-items:center;font-size:23px;font-weight:900}.brand{font-size:21px;font-weight:800;letter-spacing:-.5px}.tagline{font-size:12px;color:#cbd5e1}.hero{padding:42px 0 0}.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.05;letter-spacing:-1.7px;margin:0 0 14px;max-width:650px}.hero p{color:#cbd5e1;max-width:590px;margin:0;font-size:16px}.pill{display:inline-block;border:1px solid #334155;border-radius:999px;padding:6px 11px;color:#a7f3d0;font-size:12px;margin-bottom:16px}
+main{max-width:1060px;margin:-26px auto 0;padding:0 20px 44px}.tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 24px #0f172a08}.card h2{font-size:19px;margin:0 0 5px}.card .desc{font-size:13px;color:var(--muted);margin:0 0 18px}.tool-icon{display:inline-grid;place-items:center;width:38px;height:38px;background:#ecfdf5;color:var(--green);border-radius:11px;font-size:20px;margin-bottom:12px}
+label{display:block;font-size:13px;font-weight:650;margin:12px 0 6px}input,select{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:white;color:var(--ink)}input:focus,select:focus{outline:3px solid #a7f3d0;border-color:var(--green)}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.btn{border:0;background:var(--green);color:white;border-radius:10px;padding:11px 15px;font-weight:750;cursor:pointer;margin-top:14px}.btn:hover{background:#047857}.result{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:11px;padding:12px;margin-top:14px;min-height:48px;font-weight:750;color:#065f46;overflow-wrap:anywhere}.hint{font-size:12px;color:var(--muted);margin-top:8px}.notice{background:white;border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;color:#475569;font-size:13px}.section-title{margin:36px 0 16px;font-size:24px;letter-spacing:-.5px}footer{border-top:1px solid var(--line);padding:25px 20px;color:var(--muted);font-size:13px;background:white}.footer-inner{max-width:1060px;margin:auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}footer a{color:#047857;text-decoration:none;margin-right:12px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:680px){.tool-grid{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.hero{padding-top:32px}.card{padding:18px}header{padding-bottom:48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="nav"><div class="logo" aria-hidden="true">✓</div><div><div class="brand">QuickTools</div><div class="tagline">Simple tools. Free for everyone.</div></div></div>
+    <section class="hero"><span class="pill">FREE ONLINE CALCULATORS</span><h1>Get things done faster.</h1><p>Useful everyday calculators, with quick results and no account required. Choose a tool below and get started.</p></section>
+  </div>
+</header>
+<main>
+  <h2 class="section-title">Choose your tool</h2>
+  <div class="tool-grid">
+    <section class="card" id="percentage">
+      <div class="tool-icon">％</div><h2>Percentage Calculator</h2><p class="desc">Find a percentage of a number, or calculate what percentage one number is of another.</p>
+      <label for="pctMode">Calculation</label><select id="pctMode"><option value="of">What is X% of Y?</option><option value="is">X is what percent of Y?</option><option value="change">Percentage change from X to Y</option></select>
+      <div class="fields"><div><label for="pctX" id="pctXLabel">Percentage (X)</label><input id="pctX" type="number" inputmode="decimal" placeholder="e.g. 18"></div><div><label for="pctY" id="pctYLabel">Number (Y)</label><input id="pctY" type="number" inputmode="decimal" placeholder="e.g. 2500"></div></div>
+      <button class="btn" onclick="calcPercent()">Calculate</button><div class="result" id="pctResult" aria-live="polite">Your result will appear here.</div>
+    </section>
+    <section class="card" id="gst">
+      <div class="tool-icon">₹</div><h2>GST Calculator</h2><p class="desc">Estimate GST added to a price or included within a final price.</p>
+      <label for="gstAmount">Amount (₹)</label><input id="gstAmount" type="number" min="0" step="any" placeholder="e.g. 1000">
+      <div class="fields"><div><label for="gstRate">GST rate</label><select id="gstRate"><option value="5">5%</option><option value="12">12%</option><option value="18" selected>18%</option><option value="28">28%</option><option value="3">3%</option><option value="0">0%</option></select></div><div><label for="gstMode">Amount type</label><select id="gstMode"><option value="add">Add GST to amount</option><option value="included">GST already included</option></select></div></div>
+      <button class="btn" onclick="calcGST()">Calculate GST</button><div class="result" id="gstResult" aria-live="polite">Your result will appear here.</div><p class="hint">This is a calculator, not tax advice. Applicable rates depend on the item or service.</p>
+    </section>
+    <section class="card" id="age">
+      <div class="tool-icon">▦</div><h2>Age Calculator</h2><p class="desc">Calculate your age in years, months and days from your date of birth.</p>
+      <label for="birthDate">Date of birth</label><input id="birthDate" type="date">
+      <button class="btn" onclick="calcAge()">Calculate age</button><div class="result" id="ageResult" aria-live="polite">Your age will appear here.</div>
+    </section>
+    <section class="card" id="salary">
+      <div class="tool-icon">₹</div><h2>Salary Estimator</h2><p class="desc">Estimate monthly take-home pay from the deductions you enter.</p>
+      <label for="salaryGross">Monthly gross salary (₹)</label><input id="salaryGross" type="number" min="0" step="any" placeholder="e.g. 40000">
+      <div class="fields"><div><label for="salaryDeductions">Total monthly deductions (₹)</label><input id="salaryDeductions" type="number" min="0" step="any" placeholder="e.g. 2500"></div><div><label for="salaryOther">Other deductions (₹)</label><input id="salaryOther" type="number" min="0" step="any" placeholder="e.g. 500"></div></div>
+      <button class="btn" onclick="calcSalary()">Estimate take-home</button><div class="result" id="salaryResult" aria-live="polite">Your estimate will appear here.</div><p class="hint">Enter all deductions you want included. This does not automatically calculate statutory tax or payroll deductions.</p>
+    </section>
+    <section class="card" id="emi">
+      <div class="tool-icon">↗</div><h2>Loan EMI Calculator</h2><p class="desc">Estimate a monthly EMI using loan amount, annual interest rate and tenure.</p>
+      <label for="loanAmount">Loan amount (₹)</label><input id="loanAmount" type="number" min="0" step="any" placeholder="e.g. 500000">
+      <div class="fields"><div><label for="loanRate">Annual interest (%)</label><input id="loanRate" type="number" min="0" step="any" placeholder="e.g. 9.5"></div><div><label for="loanYears">Tenure (years)</label><input id="loanYears" type="number" min="0.1" step="any" placeholder="e.g. 5"></div></div>
+      <button class="btn" onclick="calcEMI()">Calculate EMI</button><div class="result" id="emiResult" aria-live="polite">Your EMI estimate will appear here.</div><p class="hint">Actual lender fees, rates and repayment schedules may differ.</p>
+    </section>
+    <section class="card" id="discount">
+      <div class="tool-icon">％</div><h2>Discount Calculator</h2><p class="desc">See how much you save and the final price after a discount.</p>
+      <div class="fields"><div><label for="price">Original price (₹)</label><input id="price" type="number" min="0" step="any" placeholder="e.g. 2499"></div><div><label for="discountRate">Discount (%)</label><input id="discountRate" type="number" min="0" max="100" step="any" placeholder="e.g. 20"></div></div>
+      <button class="btn" onclick="calcDiscount()">Calculate discount</button><div class="result" id="discountResult" aria-live="polite">Your result will appear here.</div>
+    </section>
+  </div>
+  <section class="notice"><strong>Privacy-friendly by design:</strong> these calculators run in your browser. The values you enter are not sent to a server by this page. Avoid entering confidential information on websites unless you trust their privacy practices.</section>
+  <section class="notice"><strong>About QuickTools:</strong> QuickTools is an independent starter project providing simple everyday calculators. Results are estimates for general information. Please verify important financial, tax or legal calculations with a qualified professional.</section>
+</main>
+<footer><div class="footer-inner"><div>© <span id="year"></span> QuickTools · Simple tools. Free for everyone.</div><div><a href="#percentage">Calculators</a><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Back to top ↑</a></div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const num=id=>{const v=Number($(id).value);return $(id).value.trim()!==''&&Number.isFinite(v)?v:null};
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n);
+const fmt=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:4}).format(n);
+function show(id,msg){$(id).textContent=msg}
+function calcPercent(){
+ const x=num('pctX'),y=num('pctY'),mode=$('pctMode').value;
+ if(x===null||y===null){show('pctResult','Please enter both numbers.');return}
+ if(mode==='of')show('pctResult',`${fmt(x)}% of ${fmt(y)} = ${fmt(x*y/100)}`);
+ else if(mode==='is'){if(y===0){show('pctResult','The second number cannot be zero.');return}show('pctResult',`${fmt(x)} is ${fmt(x/y*100)}% of ${fmt(y)}.`)}
+ else {if(x===0){show('pctResult','Starting value cannot be zero for percentage change.');return}show('pctResult',`Percentage change: ${fmt((y-x)/Math.abs(x)*100)}% (${y>=x?'increase':'decrease'}).`)}
+}
+$('pctMode').addEventListener('change',()=>{const m=$('pctMode').value;$('pctXLabel').textContent=m==='of'?'Percentage (X)':m==='is'?'Number (X)':'Starting value (X)';$('pctYLabel').textContent=m==='of'?'Number (Y)':m==='is'?'Total (Y)':'Ending value (Y)'});
+function calcGST(){const a=num('gstAmount'),r=num('gstRate');if(a===null||r===null||a<0){show('gstResult','Enter a valid non-negative amount.');return}if($('gstMode').value==='add'){const tax=a*r/100;show('gstResult',`GST: ${money(tax)} · Total: ${money(a+tax)}`)}else{const base=a/(1+r/100),tax=a-base;show('gstResult',`Base amount: ${money(base)} · Included GST: ${money(tax)}`)}}
+function calcAge(){const raw=$('birthDate').value;if(!raw){show('ageResult','Please select your date of birth.');return}const b=new Date(raw+'T00:00:00'),now=new Date();now.setHours(0,0,0,0);if(b>now){show('ageResult','Date of birth cannot be in the future.');return}let y=now.getFullYear()-b.getFullYear(),m=now.getMonth()-b.getMonth(),d=now.getDate()-b.getDate();if(d<0){m--;const prev=new Date(now.getFullYear(),now.getMonth(),0);d+=prev.getDate()}if(m<0){y--;m+=12}show('ageResult',`${y} years, ${m} months and ${d} days`)}
+function calcSalary(){const g=num('salaryGross'),d=num('salaryDeductions'),o=num('salaryOther');if(g===null||d===null||o===null||g<0||d<0||o<0){show('salaryResult','Enter valid non-negative values in all fields.');return}const take=g-d-o;if(take<0){show('salaryResult','Deductions exceed gross salary. Please check the amounts.');return}show('salaryResult',`Estimated take-home: ${money(take)} per month · ${money(take*12)} per year`)}
+function calcEMI(){const p=num('loanAmount'),annual=num('loanRate'),years=num('loanYears');if(p===null||annual===null||years===null||p<=0||annual<0||years<=0){show('emiResult','Enter a positive loan amount and tenure, and a non-negative interest rate.');return}const n=Math.round(years*12),r=annual/1200;const emi=r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);show('emiResult',`Monthly EMI: ${money(emi)} · Total repayment: ${money(emi*n)} · Interest: ${money(emi*n-p)}`)}
+function calcDiscount(){const p=num('price'),r=num('discountRate');if(p===null||r===null||p<0||r<0||r>100){show('discountResult','Enter a valid price and a discount from 0% to 100%.');return}show('discountResult',`You save ${money(p*r/100)} · Final price: ${money(p*(1-r/100))}`)}
+$('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
